@@ -1,76 +1,29 @@
 <div class="container">
-  <div class="row mt-3">
-    <div class="col">
-      <div class="d-grid">
-        <button class="btn btn-primary" type="button">1</button>
+  <div *ngIf="validChecksums.length === 0">
+    <div class="row mt-3">
+      <p class="text-center mb-0 pb-0 lead fw-bold">&nbsp; {{displayRolls(diceRolls)}} &nbsp;</p>
+    </div>
+    <div class="row mt-3" *ngFor="let i of [0, 1]">
+      <div class="col" *ngFor="let j of [0, 1, 2, 3]">
+        <div class="d-grid">
+          <button class="btn btn-primary" type="button" (click)="addEntropy(4*i + j)">{{4*i + j + 1}}</button>
+        </div>
       </div>
     </div>
-    <div class="col">
-      <div class="d-grid">
-        <button class="btn btn-primary" type="button">2</button>
-      </div>
-    </div>
-    <div class="col">
-      <div class="d-grid">
-        <button class="btn btn-primary" type="button">3</button>
-      </div>
-    </div>
-    <div class="col">
-      <div class="d-grid">
-        <button class="btn btn-primary" type="button">4</button>
-      </div>
-    </div>
-  </div>
-  <div class="row mt-3">
-    <div class="col">
-      <div class="d-grid">
-        <button class="btn btn-primary" type="button">5</button>
-      </div>
-    </div>
-    <div class="col">
-      <div class="d-grid">
-        <button class="btn btn-primary" type="button">6</button>
-      </div>
-    </div>
-    <div class="col">
-      <div class="d-grid">
-        <button class="btn btn-primary" type="button">7</button>
-      </div>
-    </div>
-    <div class="col">
-      <div class="d-grid">
-        <button class="btn btn-primary" type="button">8</button>
-      </div>
-    </div>
-  </div>
-  <div class="row mt-3">
-    <p class="text-center mb-0 pb-0 lead fw-bold">3, 5</p>
   </div>
   <ul class="list-group mt-3">
-    <li class="list-group-item d-flex justify-content-between align-items-center">
-      <span class="badge bg-success rounded-pill">#1</span>
-      zoo
-      <span class="badge bg-primary rounded-pill">2, 4, 7</span>
-    </li>
-    <li class="list-group-item d-flex justify-content-between align-items-center">
-      <span class="badge bg-success rounded-pill">#2</span>
-      atitude
-      <span class="badge bg-primary rounded-pill">3, 6, 1</span>
-    </li>
-    <li class="list-group-item d-flex justify-content-between align-items-center">
-      <span class="badge bg-success rounded-pill">#3</span>
-      dump
-      <span class="badge bg-primary rounded-pill">3, 5, 2</span>
+    <li class="list-group-item d-flex justify-content-between align-items-center" *ngFor="let word of words; let i = index">
+      <span class="badge bg-success rounded-pill">#{{i + 1}}</span>
+      {{word.index}} => {{word.label}}
+      <span class="badge bg-primary rounded-pill">{{displayRolls(word.rolls)}}</span>
     </li>
   </ul>
-  <div class="row mt-3">
-    <p class="text-center mb-0 pb-0 lead fw-bold">Valid Checksums</p>
+  <div *ngIf="validChecksums.length !== 0">
+    <div class="row mt-3">
+      <p class="text-center mb-0 pb-0 lead fw-bold">Valid Checksums</p>
+    </div>
+    <ul class="list-group mt-3 mb-3">
+      <li class="list-group-item text-center" *ngFor="let checksum of validChecksums">{{checksum}}</li>
+    </ul>
   </div>
-  <ul class="list-group mt-3">
-    <li class="list-group-item text-center">Cras justo odio</li>
-    <li class="list-group-item text-center">Dapibus ac facilisis in</li>
-    <li class="list-group-item text-center">Morbi leo risus</li>
-    <li class="list-group-item text-center">Porta ac consectetur ac</li>
-    <li class="list-group-item text-center">Vestibulum at eros</li>
-  </ul>
 </div>
